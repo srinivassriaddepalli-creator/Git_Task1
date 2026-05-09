@@ -813,5 +813,344 @@ These operations are essential for effective Git branch management workflows.
 
 ```
 ```
+# Git Task - 4 Stash, Reset, Revert, and Commit History Documentation
+
+````md id="z8q4vp"
+# Git Stash, Reset, Revert, and Commit History
+
+This documentation demonstrates:
+- Stashing changes
+- Viewing stash list
+- Applying stashed changes
+- Creating commits
+- Undoing commits using reset
+- Reverting commits safely
+- Verifying commit history
+
+---
+
+# Step 1: Save Changes Using Git Stash
+
+Command:
+```bash
+git stash
+````
+<img width="425" height="28" alt="image" src="https://github.com/user-attachments/assets/e5eb0507-00e8-4991-a3df-5b103616c659" />
+
+Output:
+
+```bash id="q7w2rm"
+Saved working directory and index state WIP on main: 23abb4a Fourth Commit
+```
+
+Explanation:
+
+* Temporarily saves uncommitted changes
+* Cleans the working directory
+
+---
+
+# Step 2: View Stash List
+
+Command:
+
+```bash id="j5t8xp"
+git stash list
+```
+<img width="311" height="27" alt="image" src="https://github.com/user-attachments/assets/87cc72b1-1ae5-45d1-bac3-78d4da98cb46" />
+
+Output:
+
+```bash id="v1m6zk"
+stash@{0}: WIP on main: 23abb4a Fourth Commit
+```
+
+Explanation:
+
+* Displays all saved stash entries
+* `stash@{0}` is the latest stash
+
+---
+
+# Step 3: Apply Stashed Changes
+
+Command:
+
+```bash id="t8x3nv"
+git stash apply
+```
+<img width="440" height="276" alt="image" src="https://github.com/user-attachments/assets/1114ecab-2730-40f0-9f2c-aaa0a0c7a52f" />
+
+Output:
+
+```bash id="h9p4lw"
+Changes not staged for commit:
+        modified:   app.py
+
+Untracked files:
+        Fourth_Commit.png
+        Git_log_oneline2.png
+        Merge_with_main_branch.png
+        New_branch.png
+        Safe_delete.png
+        dummy_branch.png
+        force_delete_branch.png
+```
+
+Explanation:
+
+* Restores stashed changes back into the working directory
+* Keeps the stash entry saved
+
+---
+
+# Step 4: Stage Restored Changes
+
+Command:
+
+```bash id="p6w1jr"
+git add .
+```
+
+Explanation:
+
+* Adds all restored and modified files to staging
+
+---
+
+# Step 5: Create Fifth Commit
+
+Command:
+
+```bash id="f2n9xd"
+git commit -m "Fifth Commit"
+```
+<img width="359" height="130" alt="image" src="https://github.com/user-attachments/assets/002824ae-d070-4028-b432-cf50be0d2706" />
+
+Output:
+
+```bash id="g3v7my"
+[main 67ef5f6] Fifth Commit
+```
+
+Explanation:
+
+* Saves staged files into Git history
+
+Files included:
+
+* Fourth_Commit.png
+* Git_log_oneline2.png
+* Merge_with_main_branch.png
+* New_branch.png
+* Safe_delete.png
+* dummy_branch.png
+* force_delete_branch.png
+* app.py changes
+
+---
+
+# Step 6: Add More Changes
+
+Command:
+
+```bash id="s5z8kh"
+git add .
+```
+
+Explanation:
+
+* Stages additional modifications in `app.py`
+
+---
+
+# Step 7: Create Error Commit
+
+Command:
+
+```bash id="d4q1tn"
+git commit -m "error code"
+```
+<img width="353" height="77" alt="image" src="https://github.com/user-attachments/assets/1df79577-26bb-420a-9f13-5edc48838489" />
+
+Output:
+
+```bash id="l9y3rp"
+[main 5b55af4] error code
+```
+
+Explanation:
+
+* Creates a commit containing unwanted changes
+
+---
+
+# Step 8: Undo Last Commit Using Reset
+
+Command:
+
+```bash id="x2m6vb"
+git reset --hard HEAD~1
+```
+<img width="355" height="25" alt="image" src="https://github.com/user-attachments/assets/fd64c722-f948-4f13-8be2-54e1e8c56aa0" />
+
+Output:
+
+```bash id="w8n5jk"
+HEAD is now at 67ef5f6 Fifth Commit
+```
+
+Explanation:
+
+* Removes the latest commit permanently
+* Restores repository back to `Fifth Commit`
+
+---
+
+# Step 9: Create Another Commit
+
+Command:
+
+```bash id="c1r7oz"
+git add .
+```
+<img width="375" height="41" alt="image" src="https://github.com/user-attachments/assets/9dafcd4d-5563-428e-81b5-cf7b9043117d" />
+
+```bash id="v5p8da"
+git commit -m "error code commit2"
+```
+
+Output:
+
+```bash id="m4x0qs"
+[main a3a44c8] error code commit2
+```
+
+Explanation:
+
+* Creates another commit with changes
+
+---
+
+# Step 10: Revert the Commit Safely
+
+Command:
+
+```bash id="y9k3wv"
+git revert HEAD
+```
+<img width="289" height="38" alt="image" src="https://github.com/user-attachments/assets/9cb2f9f5-043a-4eab-97ff-46df64f26c11" />
+
+Output:
+
+```bash id="e6t1qh"
+[main cfb80d8] Revert "error code commit2"
+```
+
+Explanation:
+
+* Creates a new commit that reverses the previous commit
+* Does not remove commit history
+
+---
+
+# Step 11: Verify Commit History
+
+Command:
+
+```bash id="n7w4pk"
+git log --oneline
+```
+<img width="291" height="121" alt="image" src="https://github.com/user-attachments/assets/1718d5f4-f580-4bab-b4a6-ee932b0669c3" />
+
+Output:
+
+```bash id="u2m8jx"
+cfb80d8 Revert "error code commit2"
+a3a44c8 error code commit2
+67ef5f6 Fifth Commit
+23abb4a Fourth Commit
+4ec4888 Third Commit
+e7fcff2 Second Commit
+ec0982f First Commit
+```
+
+Explanation:
+
+* Displays concise commit history
+* Shows both:
+
+  * Original commit
+  * Revert commit
+
+---
+
+# Git Commands Summary
+
+```bash id="o4r2mz"
+git stash
+
+git stash list
+
+git stash apply
+
+git add .
+
+git commit -m "Fifth Commit"
+
+git commit -m "error code"
+
+git reset --hard HEAD~1
+
+git add .
+
+git commit -m "error code commit2"
+
+git revert HEAD
+
+git log --oneline
+```
+
+---
+
+# Important Git Concepts
+
+| Command                   | Purpose                          |
+| ------------------------- | -------------------------------- |
+| `git stash`               | Temporarily save changes         |
+| `git stash list`          | View stashes                     |
+| `git stash apply`         | Restore stashed changes          |
+| `git reset --hard HEAD~1` | Remove latest commit permanently |
+| `git revert HEAD`         | Create reversing commit          |
+| `git log --oneline`       | View commit history              |
+
+---
+
+# Reset vs Revert
+
+| Feature                      | Reset | Revert |
+| ---------------------------- | ----- | ------ |
+| Removes commit history       | Yes   | No     |
+| Creates new commit           | No    | Yes    |
+| Safe for shared repositories | No    | Yes    |
+| Rewrites history             | Yes   | No     |
+
+---
+
+# Conclusion
+
+This task demonstrated:
+
+* Saving temporary work using stash
+* Restoring stashed changes
+* Creating commits
+* Undoing commits using reset
+* Safely reversing commits using revert
+* Viewing complete commit history
+
+These operations are essential for advanced Git version control workflows.
+
+```
+```
 
 
