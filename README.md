@@ -461,4 +461,357 @@ These commands form the foundation of daily Git workflows.
 
 ```
 ```
+# Git Task - 3 Branch Merge and Force Delete Documentation
+
+````md id="g8m2xr"
+# Git Branch Merge and Force Delete
+
+This documentation demonstrates:
+- Creating a feature branch
+- Checking available branches
+- Committing changes in a branch
+- Switching branches
+- Merging a feature branch into main
+- Verifying merged commits
+- Safely deleting a branch
+- Creating and force deleting a dummy branch
+
+---
+
+# Step 1: Create a New Feature Branch
+
+Command:
+```bash
+git checkout -b feature-update
+````
+<img width="391" height="65" alt="image" src="https://github.com/user-attachments/assets/7009a906-dc33-4e18-a05d-644d8e8f7297" />
+
+Output:
+
+```bash id="o8p9wm"
+Switched to a new branch 'feature-update'
+```
+
+Explanation:
+
+* Creates and switches to the `feature-update` branch
+
+---
+
+# Step 2: Verify Available Branches
+
+Command:
+
+```bash id="m7pk1o"
+git branch
+```
+
+Output:
+
+```bash id="4xj6hn"
+* feature-update
+  main
+```
+
+Explanation:
+
+* Displays all local branches
+* `*` indicates the currently active branch
+
+---
+
+# Step 3: Stage Changes
+
+Command:
+
+```bash id="khx8a9"
+git add .
+```
+
+Explanation:
+
+* Adds all modified and new files to staging
+
+---
+
+# Step 4: Commit Changes
+
+Command:
+
+```bash id="8j1xuv"
+git commit -m "Fourth Commit"
+```
+
+<img width="376" height="116" alt="image" src="https://github.com/user-attachments/assets/98371ee1-cb86-46ad-8b9c-fef2e2cd6a38" />
+
+Output:
+
+```bash id="pq2d1f"
+[feature-update 23abb4a] Fourth Commit
+```
+
+Explanation:
+
+* Saves staged changes into Git history
+
+Files included:
+
+* Git_log.png
+* Git_log_oneline.png
+* Second_Commit.png
+* Staging_Differences.png
+* Staging_specific_Changes.png
+* Third_Commit.png
+* app.py modifications
+
+---
+
+# Step 5: Switch to Main Branch
+
+Command:
+
+```bash id="rq9l0d"
+git checkout main
+```
+
+Output:
+
+```bash id="w3p9gs"
+Switched to branch 'main'
+```
+
+Explanation:
+
+* Switches from `feature-update` to `main`
+
+---
+
+# Step 6: Merge Feature Branch into Main
+
+Command:
+
+```bash id="w8r2bt"
+git merge feature-update
+```
+<img width="409" height="220" alt="image" src="https://github.com/user-attachments/assets/2c6e0bb1-7957-477f-b827-1ef903879e1c" />
+
+Output:
+
+```bash id="b3pxm0"
+Updating 4ec4888..23abb4a
+Fast-forward
+```
+
+Explanation:
+
+* Merges all changes from `feature-update` into `main`
+* Fast-forward merge occurred because no conflicting commits existed
+
+---
+
+# Step 7: Verify Merge History
+
+Command:
+
+```bash id="7d4n6y"
+git log --oneline
+```
+<img width="334" height="63" alt="image" src="https://github.com/user-attachments/assets/a4f6d237-f940-4772-833f-90531bb39dc3" />
+
+Output:
+
+```bash id="g5q2he"
+23abb4a (HEAD -> main, feature-update) Fourth Commit
+4ec4888 Third Commit
+e7fcff2 Second Commit
+ec0982f First Commit
+```
+
+Explanation:
+
+* Displays concise commit history
+* Confirms `Fourth Commit` is now part of `main`
+
+---
+
+# Step 8: Delete Feature Branch Safely
+
+Command:
+
+```bash id="7zq0pt"
+git branch -d feature-update
+```
+<img width="383" height="26" alt="image" src="https://github.com/user-attachments/assets/c16437db-6973-424e-9718-2e9fa7bf85d5" />
+
+Output:
+
+```bash id="m4s9ka"
+Deleted branch feature-update (was 23abb4a).
+```
+
+Explanation:
+
+* Safely deletes the merged branch
+
+---
+
+# Step 9: Create a Dummy Branch
+
+Command:
+
+```bash id="f0v3lm"
+git checkout -b dummy-branch
+```
+<img width="335" height="27" alt="image" src="https://github.com/user-attachments/assets/4a93f2ce-f4af-4757-82aa-bc43eea65402" />
+
+Output:
+
+```bash id="x3y5ru"
+Switched to a new branch 'dummy-branch'
+```
+
+Explanation:
+
+* Creates a temporary branch for testing force delete
+
+---
+
+# Step 10: Stage Changes in Dummy Branch
+
+Command:
+
+```bash id="v6m8pk"
+git add .
+```
+
+---
+
+# Step 11: Commit Changes in Dummy Branch
+
+Command:
+
+```bash id="k7j2ow"
+git commit -m "dummy commit"
+```
+
+Output:
+
+```bash id="h1v9dt"
+[dummy-branch e33d2ee] dummy commit
+```
+
+Explanation:
+
+* Saves temporary branch changes
+
+---
+
+# Step 12: Switch Back to Main Branch
+
+Command:
+
+```bash id="w4n7qz"
+git checkout main
+```
+
+Output:
+
+```bash id="d2x8ms"
+Switched to branch 'main'
+```
+
+---
+
+# Step 13: Force Delete Dummy Branch
+
+Command:
+
+```bash id="t8l1qc"
+git branch -D dummy-branch
+```
+<img width="326" height="44" alt="image" src="https://github.com/user-attachments/assets/d63218bb-08e2-4410-9aa3-2f7a9f292b71" />
+Output:
+
+```bash id="n5m3vr"
+Deleted branch dummy-branch (was e33d2ee).
+```
+
+Explanation:
+
+* Force deletes branch even though it was not merged
+
+---
+
+# Git Commands Summary
+
+```bash id="c6z2qa"
+git checkout -b feature-update
+
+git branch
+
+git add .
+
+git commit -m "Fourth Commit"
+
+git checkout main
+
+git merge feature-update
+
+git log --oneline
+
+git branch -d feature-update
+
+git checkout -b dummy-branch
+
+git add .
+
+git commit -m "dummy commit"
+
+git checkout main
+
+git branch -D dummy-branch
+```
+
+---
+
+# Important Git Concepts
+
+| Command             | Purpose                  |
+| ------------------- | ------------------------ |
+| `git checkout -b`   | Create and switch branch |
+| `git branch`        | View branches            |
+| `git add .`         | Stage all files          |
+| `git commit -m`     | Save changes             |
+| `git merge`         | Merge branches           |
+| `git log --oneline` | View commit history      |
+| `git branch -d`     | Safe branch delete       |
+| `git branch -D`     | Force branch delete      |
+
+---
+
+# Safe Delete vs Force Delete
+
+| Option | Description                     |
+| ------ | ------------------------------- |
+| `-d`   | Deletes merged branches safely  |
+| `-D`   | Force deletes unmerged branches |
+
+---
+
+# Conclusion
+
+This task demonstrated:
+
+* Branch creation
+* Branch switching
+* Merging branches
+* Viewing commit history
+* Safe branch deletion
+* Force deleting temporary branches
+
+These operations are essential for effective Git branch management workflows.
+
+```
+```
+
 
